@@ -49,16 +49,6 @@ class TestServerUninstall(BaseProductTestCase):
         self.assert_path_removed(container, '/usr/shared/doc/presto')
         self.assert_path_removed(container, '/etc/init.d/presto')
 
-    def test_uninstall_twice(self):
-        self.test_uninstall()
-
-        output = self.run_prestoadmin('server uninstall', raise_error=False)
-        with open(os.path.join(LOCAL_RESOURCES_DIR, 'uninstall_twice.txt'),
-                  'r') as f:
-            expected = f.read()
-
-        self.assertEqualIgnoringOrder(expected, output)
-
     def test_uninstall_lost_host(self):
         self.setup_cluster(NoHadoopBareImageProvider(), STANDALONE_PRESTO_CLUSTER)
 
